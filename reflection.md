@@ -8,6 +8,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
 
+  When I first ran the game, the UI loaded but the behavior was clearly wrong. The hints did not match my guesses, the score dropped into negative numbers, and the attempts counter didn’t match the debug info. The game also accepted extremely large numbers like 440 without any validation.
+
 **Bug Reproduction Log**
 
 Document at least 3 bugs you found. Add rows as needed.
@@ -17,6 +19,12 @@ Document at least 3 bugs you found. Add rows as needed.
 | | | | |
 | | | | |
 | | | | |
+
+| Input     | Expected Behavior                           | Actual Behavior                          | Console |
+|-----------|---------------------------------------------|------------------------------------------|---------|
+| 440       | Hint says "Too High" / "Go LOWER"           | Hint says "Go HIGHER!"                   | none    |
+| 1         | Score stays positive on Easy                | Score becomes negative after few guesses | none    |
+| 44        | Attempts left matches debug Attempts value  | Attempts left: 2, debug Attempts: 4      | none    |
 
 ---
 
@@ -49,3 +57,7 @@ Document at least 3 bugs you found. Add rows as needed.
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+One habit I want to reuse is writing simple tests to confirm my fixes. Even as a beginner, tests helped me feel confident that the logic was correct. I also liked using AI to explain confusing code step‑by‑step.
+
+Next time, I would ask the AI more targeted questions instead of broad ones, because specific prompts gave me better results. This project showed me that AI-generated code can look correct but still contain serious logic bugs, so human judgment is always needed.
