@@ -14,12 +14,6 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 Document at least 3 bugs you found. Add rows as needed.
 
-| Input | Expected Behavior | Actual Behavior | Console Output / Error |
-|-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
-
 | Input     | Expected Behavior                           | Actual Behavior                          | Console |
 |-----------|---------------------------------------------|------------------------------------------|---------|
 | 440       | Hint says "Too High" / "Go LOWER"           | Hint says "Go HIGHER!"                   | none    |
@@ -34,6 +28,9 @@ Document at least 3 bugs you found. Add rows as needed.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
+I used Copilot inside VS Code to understand the logic and help fix the bugs. One correct suggestion was when the AI told me to move the guess‑checking logic into logic_utils.py and fix the comparison so high guesses return “Too High.” I verified this by running pytest and playing the game again.
+
+One incorrect suggestion was when the AI recommended removing the score update line completely. When I tested the game, the score stopped changing, so I knew the suggestion was wrong and I undid it. This helped me learn that AI suggestions must always be tested, not blindly accepted.
 ---
 
 ## 3. Debugging and testing your fixes
@@ -43,12 +40,18 @@ Document at least 3 bugs you found. Add rows as needed.
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
+I decided a bug was fixed only when both pytest passed and the game behaved correctly in Streamlit. One test I ran was checking that a guess higher than the secret returns a “Too High” or “Go LOWER” message. The test passed, and the game also showed the correct hint when I tried it manually.
+
+AI helped me design the pytest test by generating a simple test function that compared the guess and secret. This made it easier to confirm the logic was working.
 ---
 
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
+Streamlit reruns the entire script every time the user interacts with the page. Without session state, all variables would reset on every button click. Session state lets the game remember things like score, attempts, and the secret number across reruns.
+
+I would explain it to a friend like this: “Streamlit refreshes the whole page every time you click something, so session state is like a little backpack that saves your variables so they don’t disappear.”
 ---
 
 ## 5. Looking ahead: your developer habits
