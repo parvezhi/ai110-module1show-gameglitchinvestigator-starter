@@ -8,17 +8,19 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
 
-  When I first ran the game, the UI loaded but the behavior was clearly wrong. The hints did not match my guesses, the score dropped into negative numbers, and the attempts counter didn’t match the debug info. The game also accepted extremely large numbers like 440 without any validation.
+When I first ran the game, the UI loaded but the behavior was clearly wrong. The hints did not match my guesses, the score dropped into negative numbers, and the attempts counter didn’t match the debug info. The game also accepted extremely large numbers like 440 without any validation. It was obvious the logic and state handling were broken.
 
 **Bug Reproduction Log**
 
 Document at least 3 bugs you found. Add rows as needed.
 
-| Input     | Expected Behavior                           | Actual Behavior                          | Console |
-|-----------|---------------------------------------------|------------------------------------------|---------|
-| 440       | Hint says "Too High" / "Go LOWER"           | Hint says "Go HIGHER!"                   | none    |
-| 1         | Score stays positive on Easy                | Score becomes negative after few guesses | none    |
-| 44        | Attempts left matches debug Attempts value  | Attempts left: 2, debug Attempts: 4      | none    |
+
+
+| Input | Expected Behavior | Actual Behavior | Console | Suspected Location |
+|-------|-------------------|-----------------|---------|--------------------|
+| 440 | Hint says “Too High” / “Go LOWER” | Hint says “Go HIGHER!” | none | logic_utils.py / check_guess |
+| 1 | Score stays positive on Easy | Score becomes negative | none | app.py scoring block |
+| 44 | Attempts left matches debug Attempts | UI shows 2, debug shows 4 | none | app.py session_state handling |
 
 ---
 
@@ -40,10 +42,9 @@ One incorrect suggestion was when the AI recommended removing the score update l
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
-I decided a bug was fixed only when both pytest passed and the game behaved correctly in Streamlit. One test I ran was checking that a guess higher than the secret returns a “Too High” or “Go LOWER” message. The test passed, and the game also showed the correct hint when I tried it manually.
+I decided a bug was fixed only when both pytest passed and the game behaved correctly in Streamlit. One test I ran was checking that a guess higher than the secret returns a “Too High” message. The test passed, and the game also showed the correct hint when I tried it manually.
 
 AI helped me design the pytest test by generating a simple test function that compared the guess and secret. This made it easier to confirm the logic was working.
----
 
 ## 4. What did you learn about Streamlit and state?
 
@@ -52,7 +53,6 @@ AI helped me design the pytest test by generating a simple test function that co
 Streamlit reruns the entire script every time the user interacts with the page. Without session state, all variables would reset on every button click. Session state lets the game remember things like score, attempts, and the secret number across reruns.
 
 I would explain it to a friend like this: “Streamlit refreshes the whole page every time you click something, so session state is like a little backpack that saves your variables so they don’t disappear.”
----
 
 ## 5. Looking ahead: your developer habits
 
