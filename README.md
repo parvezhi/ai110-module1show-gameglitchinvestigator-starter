@@ -29,6 +29,18 @@ It wrote the code, ran away, and now the game is unplayable.
 - [ ] Detail which bugs you found.
 - [ ] Explain what fixes you applied.
 
+- The game’s purpose is to let the user guess a secret number with correct hints and scoring.
+- Major bugs included:
+- Secret number resetting on every button click
+- Incorrect hint logic (“Go HIGHER!” when the guess was already too high)
+- Score dropping into negative values
+- Attempts counter not matching debug info
+- Fixes applied:
+- Added proper Streamlit `session_state` usage
+- Corrected comparison logic in `check_guess`
+- Refactored logic into `logic_utils.py`
+- Added pytest tests to verify correctness
+
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
